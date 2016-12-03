@@ -22,10 +22,10 @@
             tools:text="title" />
 
         <LinearLayout
-            android:padding="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="8dp">
 
             <ImageView
                 android:id="@+id/post_image_view"
@@ -61,6 +61,7 @@
             android:id="@+id/overview_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="8dp"
             android:textSize="24sp"
             tools:text="overview" />
     </LinearLayout>

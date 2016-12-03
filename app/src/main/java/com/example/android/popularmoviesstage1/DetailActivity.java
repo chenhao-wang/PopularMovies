@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.HashMap;
-
 public class DetailActivity extends AppCompatActivity {
 
     @Override
@@ -18,12 +16,12 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         Intent intent = getIntent();
-        HashMap<String, String> hashMap = (HashMap<String, String>) intent.getSerializableExtra("singleMovie");
-        String title = hashMap.get("title");
-        String postPath = hashMap.get("postPath");
-        String overview = hashMap.get("overview");
-        String voteAverage = hashMap.get("voteAverage") + "/10";
-        String releaseDate = hashMap.get("releaseDate");
+        MovieInfo curtMovie = intent.getParcelableExtra("curtMovie");
+        String title = curtMovie.getTitle();
+        String postPath = curtMovie.getPostPath();
+        String overview = curtMovie.getOverview();
+        String voteAverage = curtMovie.getVoteAverage() + "/10";
+        String releaseDate = curtMovie.getReleaseDate();
 
         TextView titleTextView = (TextView) findViewById(R.id.title_textview);
         ImageView postImageView = (ImageView) findViewById(R.id.post_image_view);

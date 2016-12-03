@@ -1,7 +1,10 @@
 package com.example.android.popularmoviesstage1;
 
 
-public class MovieInfo {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class MovieInfo implements Parcelable {
     private String mTitle;
     private String mPostPath;
     private String mOverview;
@@ -15,6 +18,26 @@ public class MovieInfo {
         this.mVoteAverage = mVoteAverage;
         this.mReleaseDate = mReleaseDate;
     }
+
+    private MovieInfo(Parcel in) {
+        mTitle = in.readString();
+        mPostPath = in.readString();
+        mOverview = in.readString();
+        mVoteAverage = in.readString();
+        mReleaseDate = in.readString();
+    }
+
+    public static final Creator<MovieInfo> CREATOR = new Creator<MovieInfo>() {
+        @Override
+        public MovieInfo createFromParcel(Parcel in) {
+            return new MovieInfo(in);
+        }
+
+        @Override
+        public MovieInfo[] newArray(int size) {
+            return new MovieInfo[size];
+        }
+    };
 
     public String getTitle() {
         return mTitle;
@@ -34,5 +57,19 @@ public class MovieInfo {
 
     public String getReleaseDate() {
         return mReleaseDate;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mTitle);
+        dest.writeString(mPostPath);
+        dest.writeString(mOverview);
+        dest.writeString(mVoteAverage);
+        dest.writeString(mReleaseDate);
     }
 }
