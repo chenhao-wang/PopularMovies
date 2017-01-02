@@ -4,19 +4,29 @@ package com.example.android.popularmoviesstage1;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MovieInfo implements Parcelable {
     private String mTitle;
     private String mPostPath;
     private String mOverview;
     private String mVoteAverage;
     private String mReleaseDate;
+    private String mId;
+    private List<String> mVideoList;
+    private List<String> mReviews;
 
-    public MovieInfo(String mTitle, String mPostPath, String mOverview, String mVoteAverage, String mReleaseDate) {
-        this.mTitle = mTitle;
-        this.mPostPath = mPostPath;
-        this.mOverview = mOverview;
-        this.mVoteAverage = mVoteAverage;
-        this.mReleaseDate = mReleaseDate;
+    public MovieInfo(String title, String postPath, String overview, String voteAverage, String releaseDate, List<String> videoList, List<String> reviews, String id) {
+        mTitle = title;
+        mPostPath = postPath;
+        mOverview = overview;
+        mVoteAverage = voteAverage;
+        mReleaseDate = releaseDate;
+
+        mVideoList = videoList;
+        mReviews = reviews;
+        mId = id;
     }
 
     private MovieInfo(Parcel in) {
@@ -25,6 +35,11 @@ public class MovieInfo implements Parcelable {
         mOverview = in.readString();
         mVoteAverage = in.readString();
         mReleaseDate = in.readString();
+        mVideoList = new ArrayList<>();
+        in.readStringList(mVideoList);
+        mReviews = new ArrayList<>();
+        in.readStringList(mReviews);
+        mId = in.readString();
     }
 
     public static final Creator<MovieInfo> CREATOR = new Creator<MovieInfo>() {
@@ -59,6 +74,18 @@ public class MovieInfo implements Parcelable {
         return mReleaseDate;
     }
 
+    public List<String> getReviews() {
+        return mReviews;
+    }
+
+    public List<String> getVideoList() {
+        return mVideoList;
+    }
+
+    public String getId() {
+        return mId;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -71,5 +98,8 @@ public class MovieInfo implements Parcelable {
         dest.writeString(mOverview);
         dest.writeString(mVoteAverage);
         dest.writeString(mReleaseDate);
+        dest.writeStringList(mVideoList);
+        dest.writeStringList(mReviews);
+        dest.writeString(mId);
     }
 }
